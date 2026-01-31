@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+  body {
+    @apply bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white min-h-screen;
+  }
+  [dir="rtl"] body {
+    font-family: 'Noto Sans Arabic', Inter, system-ui, sans-serif;
+  }
+}
+
+/* RTL: ensure form layout and focus rings work */
+[dir="rtl"] .flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+/* Focus visible for keyboard navigation */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  @apply outline-none ring-2 ring-sky-500 ring-offset-2 ring-offset-white dark:ring-offset-slate-800;
+}
