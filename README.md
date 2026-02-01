@@ -69,9 +69,6 @@ The “Help Me Write” feature in Step 3 uses the OpenAI Chat Completions API (
      ```
    - Restart the dev server (`npm start`) so Create React App picks up the new env.  
 
-3. **Security**  
-   - Never commit `.env` or your real key.  
-   - The key is exposed to the browser via `process.env.REACT_APP_OPENAI_API_KEY`. For production, you should proxy OpenAI requests through your own backend and keep the key on the server.
 
 If the key is missing or invalid, clicking “Help Me Write” will show an error message (e.g. “OpenAI API key is not configured” or the API error).
 
@@ -87,14 +84,6 @@ If the key is missing or invalid, clicking “Help Me Write” will show an erro
   - `services/mockSubmit.js` – Mock application submit
 - `.env.example` – Example env with `REACT_APP_OPENAI_API_KEY`
 - `README.md` – This file
-
-## Architecture and Decisions
-
-- **Single-page wizard**: Step index is kept in React state; no router needed for the wizard. Form data lives in one context and is synced to LocalStorage on change.
-- **Validation**: React Hook Form with required/pattern/min/max rules; error messages come from i18n.
-- **AI flow**: “Help Me Write” sends the current field text (or a default prompt) plus field context to OpenAI; the response is shown in a modal with Accept / Edit & Use / Discard. Accept and Edit both insert the suggestion into the field; Discard closes the modal. Timeout (e.g. 30s) and API errors are caught and shown in the same modal.
-- **RTL**: Switching to Arabic sets `document.documentElement.dir = 'rtl'` and `lang="ar"`; layout and flex order are adjusted so the form and buttons remain usable in RTL.
-- **Accessibility**: Labels, `aria-invalid`, `aria-describedby`, `role="alert"` for errors, `role="dialog"` for the AI modal, focus trap and Escape to close the modal, and visible focus styles for keyboard users.
 
 ## License
 
